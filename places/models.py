@@ -10,3 +10,11 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+class Image(models.Model):
+    image = models.ImageField(verbose_name='Картинка')
+    place = models.ForeignKey('Place', on_delete=models.CASCADE,related_name='images', verbose_name='Место')
+    number = models.PositiveIntegerField(default=0, verbose_name='Позиция картинки')
+
+    def __str__(self):
+        return f'{self.number} - {self.place}'
