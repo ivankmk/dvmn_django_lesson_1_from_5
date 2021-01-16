@@ -34,7 +34,7 @@ DEBUG = True
 SECRET_KEY = env.str('SECRET_KEY', default='TO_CHANGE')
 
 
-ALLOWED_HOSTS = ['ivankmk.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -130,10 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = env.str('STATIC_DIR', default='collected_static')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
