@@ -34,7 +34,7 @@ DEBUG = True
 SECRET_KEY = env.str('SECRET_KEY', default='TO_CHANGE')
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ivankmk.pythonanywhere.com']
 
 
 # Application definition
@@ -131,11 +131,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-MEDIA_URL = '/media/'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
