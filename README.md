@@ -1,5 +1,6 @@
 # Where to go 🐻
 Website about intersting places in Moscow
+[Demo](https://ivankmk.pythonanywhere.com/)
 
 !['Main page'](extra/screen.png)
 
