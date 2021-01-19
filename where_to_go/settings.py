@@ -133,8 +133,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = env.str('STATIC_DIR', default='collected_static')
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/var/www/static/',
+    BASE_DIR / "static"
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
