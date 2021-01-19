@@ -34,7 +34,7 @@ DEBUG = True
 SECRET_KEY = env.str('SECRET_KEY', default='TO_CHANGE')
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.pythonanywhere']
 
 
 # Application definition
@@ -134,3 +134,8 @@ STATIC_ROOT = env.str('STATIC_DIR', default='collected_static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+print(50*'!', 'This is debug')
+print(DEBUG)
+print(50*'!', 'This is static root')
+print(STATIC_ROOT)
