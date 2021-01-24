@@ -138,8 +138,3 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-print(50*'!', 'This is debug')
-print(DEBUG)
-print(50*'!', 'This is static root')
-print(STATIC_ROOT)
