@@ -30,9 +30,6 @@ DEBUG = True
 SECRET_KEY = env.str('SECRET_KEY', default='TO_CHANGE')
 
 
-ALLOWED_HOSTS = [] # 'ivankmk.pythonanywhere.com', '127.0.0.1'
-
-
 # Application definition
 
 INSTALLED_APPS = [
