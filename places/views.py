@@ -1,16 +1,17 @@
-from django.http import HttpResponse, JsonResponse
-from django.template import loader
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from .models import Place
 
 # Create your views here.
+
+
 def get_places(request):
     places = Place.objects.all()
-    place_data = {"type": "FeatureCollection", "features": []}
+    place_serialized = {"type": "FeatureCollection", "features": []}
     for place in places:
-        place_data['features'].append(
+        place_serialized['features'].append(
             {
                 "type": "Feature",
                 "geometry": {
@@ -24,14 +25,18 @@ def get_places(request):
                 }
             }
         )
-    return render(request, 'index.html', context={'data': place_data})
+    return render(request, 'index.html', context={'data': place_serialized})
 
 
 def get_place(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     data = {
         "title": place.title,
-        "imgs": [request.build_absolute_uri(image.image.url) for image in place.images.all()],
+        "imgs": [
+            request.build_absolute_uri(
+                image.image.url
+                ) for image in place.images.all()
+            ],
         "description_short": place.short_description,
         "description_long": place.long_description,
         "coordinates": {
@@ -39,4 +44,6 @@ def get_place(request, place_id):
             "lat": place.latitude
         }
     }
-    return JsonResponse(data, json_dumps_params={'ensure_ascii': False, 'indent': 4})
+    return JsonResponse(
+        data,
+        json_dumps_params={'ensure_ascii': False, 'indent': 4})
