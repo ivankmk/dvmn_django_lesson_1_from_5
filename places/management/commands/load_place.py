@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 'Insufficient data - check title, lat and long')
 
         short_description = place_details.get('description_short', '')
-        long_description = place_details.get('description_long', '')
+        long_description = place_details.get('descriptio n_long', '')
 
         place_to_load = {
             'title': title,
@@ -44,17 +44,16 @@ class Command(BaseCommand):
         print(f'Place saved: {title}')
         return place
 
-    def load_place_images(self, image_urls, place):
-        for image_url in image_urls:
-            image = Image.objects.create(place=place)
-            response = requests.get(image_url)
-            response.raise_for_status()
-            image_content = response.content
-            image.image.save(
-                os.path.basename(urlparse(image_url).path),
-                BytesIO(image_content)
-            )
-            print(f'Image saved: {image_url}')
+    def load_place_images(self, image_url, place):
+        image = Image.objects.create(place=place)
+        response = requests.get(image_url)
+        response.raise_for_status()
+        image_content = response.content
+        image.image.save(
+            os.path.basename(urlparse(image_url).path),
+            BytesIO(image_content)
+        )
+        print(f'Image saved: {image_url}')
 
     def handle(self, *args, **options):
         response = requests.get(options['url'])
@@ -62,4 +61,5 @@ class Command(BaseCommand):
         place_details = response.json()
         place = self.load_place(place_details)
         image_urls = place_details.get('imgs', [])
-        self.load_place_images(image_urls, place)
+        for image_url in image_urls:
+            self.load_place_images(image_url, place)
