@@ -33,9 +33,7 @@ def get_place(request, place_id):
     context = {
         "title": place.title,
         "imgs": [
-            request.build_absolute_uri(
-                image.image.url
-                ) for image in place.images.all()
+                image.image.url for image in place.images.all()
             ],
         "description_short": place.short_description,
         "description_long": place.long_description,
