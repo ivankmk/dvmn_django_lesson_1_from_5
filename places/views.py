@@ -30,7 +30,7 @@ def get_places(request):
 
 def get_place(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    data = {
+    context = {
         "title": place.title,
         "imgs": [
             request.build_absolute_uri(
@@ -45,5 +45,5 @@ def get_place(request, place_id):
         }
     }
     return JsonResponse(
-        data,
+        context,
         json_dumps_params={'ensure_ascii': False, 'indent': 4})
