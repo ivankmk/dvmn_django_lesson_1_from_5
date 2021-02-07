@@ -22,7 +22,7 @@ class Command(BaseCommand):
         latitude = place_details.get('coordinates', {}).get('lat')
         longitude = place_details.get('coordinates', {}).get('lng')
 
-        if not any([title, latitude, longitude]):
+        if None in [title, latitude, longitude]:
             raise InsufficientDataError(
                 'Insufficient data - check title, lat and long')
 
