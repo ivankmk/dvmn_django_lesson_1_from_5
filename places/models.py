@@ -24,8 +24,6 @@ class Image(models.Model):
         verbose_name='Место')
     image_position = models.PositiveIntegerField(
         default=0,
-        blank=False,
-        null=False,
         verbose_name='Позиция картинки')
 
     class Meta(object):
