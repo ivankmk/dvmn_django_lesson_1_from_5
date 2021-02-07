@@ -22,12 +22,12 @@ class Image(models.Model):
         on_delete=models.CASCADE,
         related_name='images',
         verbose_name='Место')
-    image_position = models.PositiveIntegerField(
+    position = models.PositiveIntegerField(
         default=0,
         verbose_name='Позиция картинки')
 
     class Meta(object):
-        ordering = ['image_position']
+        ordering = ['position']
 
     def __str__(self):
-        return f'{self.image_position} - {self.place}'
+        return f'{self.position} - {self.place}'
