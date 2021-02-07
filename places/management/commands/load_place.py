@@ -7,7 +7,7 @@ from places.models import Image, Place
 
 
 class InsufficientDataError(Exception):
-    """Base class for other exceptions"""
+    """Class of insufficient data"""
     pass
 
 
@@ -18,9 +18,9 @@ class Command(BaseCommand):
         parser.add_argument('url', type=str, help='URL for .json file.')
 
     def load_place(self, place_details):
-        title = place_details.get('title', None)
-        latitude = place_details.get('coordinates', {}).get('lat', None)
-        longitude = place_details.get('coordinates', {}).get('lng', None)
+        title = place_details.get('title')
+        latitude = place_details.get('coordinates', {}).get('lat')
+        longitude = place_details.get('coordinates', {}).get('lng')
 
         if not any([title, latitude, longitude]):
             raise InsufficientDataError(
