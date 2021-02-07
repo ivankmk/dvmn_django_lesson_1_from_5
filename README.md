@@ -9,12 +9,12 @@ Website about intersting places in Moscow
 
 - Install dependencies `pip install -r requirements.txt`
 - Go to the folder `cd where-to-go` 
-- initiate DB`python3 manage.py migrate`
+- Create the file `.env` with variables ```DEBUG```,  ```STATIC_DIR``` and ```SECRET_KEY```
+- Initiate DB`python3 manage.py migrate`
 - Run the server `python3 manage.py runserver`
 
 
 ## Environment variable
-
 Please create the file `.env` in the same folder as `manage.py` and save variables there as : `VARIABLE=value`.
 
 
