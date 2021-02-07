@@ -6,6 +6,11 @@ from django.core.management.base import BaseCommand
 from places.models import Image, Place
 
 
+class InsufficientDataError(Exception):
+    """Base class for other exceptions"""
+    pass
+
+
 class Command(BaseCommand):
     help = 'Adding the additional places into the database.'
 
@@ -13,9 +18,14 @@ class Command(BaseCommand):
         parser.add_argument('url', type=str, help='URL for .json file.')
 
     def load_place(self, place_details):
-        title = place_details.get('title', '')
-        latitude = place_details.get('coordinates', {}).get('lat', 0)
-        longitude = place_details.get('coordinates', {}).get('lng', 0)
+        title = place_details.get('title', None)
+        latitude = place_details.get('coordinates', {}).get('lat', None)
+        longitude = place_details.get('coordinates', {}).get('lng', None)
+
+        if not any([title, latitude, longitude]):
+            raise InsufficientDataError(
+                'Insufficient data - check title, lat and long')
+
         short_description = place_details.get('description_short', '')
         long_description = place_details.get('description_long', '')
 
@@ -30,7 +40,7 @@ class Command(BaseCommand):
         place, created = Place.objects.get_or_create(
             title=title,
             defaults=place_to_load
-            )
+        )
         print(f'Place saved: {title}')
         return place
 
@@ -43,7 +53,7 @@ class Command(BaseCommand):
             image.image.save(
                 os.path.basename(urlparse(image_url).path),
                 BytesIO(image_content)
-                )
+            )
             print(f'Image saved: {image_url}')
 
     def handle(self, *args, **options):
