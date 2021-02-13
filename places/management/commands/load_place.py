@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 'Insufficient data - check title, lat and long')
 
         short_description = place_details.get('description_short', '')
-        long_description = place_details.get('descriptio n_long', '')
+        long_description = place_details.get('description_long', '')
 
         place_to_load = {
             'title': title,
