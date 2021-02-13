@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ['ivankmk.pythonanywhere.com']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = os.getenv('DEBUG', default=True)
 
 SECRET_KEY = os.getenv('SECRET_KEY', default='CHANGE_IT_ASAP')
 
