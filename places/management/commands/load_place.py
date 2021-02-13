@@ -18,21 +18,21 @@ class Command(BaseCommand):
         parser.add_argument('url', type=str, help='URL for .json file.')
 
     def load_place(self, place_details):
-        title = place_details.get('title')
-        latitude = place_details.get('coordinates', {}).get('lat')
-        longitude = place_details.get('coordinates', {}).get('lng')
-
-        if None in [title, latitude, longitude]:
-            raise InsufficientDataError(
-                'Insufficient data - check title, lat and long')
+            
+        try:
+            title = place_details['title']
+            lat = place_details['coordinates']['lat']
+            lng = place_details['coordinates']['lng']
+        except KeyError:
+            raise InsufficientDataError('Insufficient data - check title, lat and long')
 
         short_description = place_details.get('description_short', '')
         long_description = place_details.get('description_long', '')
 
         place_to_load = {
             'title': title,
-            'latitude': latitude,
-            'longitude': longitude,
+            'latitude': lat,
+            'longitude': lng,
             'short_description': short_description,
             'long_description': long_description
         }
