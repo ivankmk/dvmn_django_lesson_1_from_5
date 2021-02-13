@@ -9,9 +9,9 @@ from .models import Place
 
 def get_places(request):
     places = Place.objects.all()
-    place_serialized = {"type": "FeatureCollection", "features": []}
+    places_serialized = {"type": "FeatureCollection", "features": []}
     for place in places:
-        place_serialized['features'].append(
+        places_serialized['features'].append(
             {
                 "type": "Feature",
                 "geometry": {
@@ -25,7 +25,7 @@ def get_places(request):
                 }
             }
         )
-    return render(request, 'index.html', context={'data': place_serialized})
+    return render(request, 'index.html', context={'data': places_serialized})
 
 
 def get_place(request, place_id):
